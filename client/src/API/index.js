@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const URL = axios.create({ baseURL: "/" });
+const URL = axios.create({
+	baseURL: "https://bug-tracker-ver2.herokuapp.com/",
+});
 URL.interceptors.request.use((req) => {
 	if (localStorage.getItem("profile")) {
 		req.headers.Authorization = `Bearer ${JSON.parse(

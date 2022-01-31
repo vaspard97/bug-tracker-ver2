@@ -6,8 +6,7 @@ export const sendVerificationEmail = async ({
 	verificationToken,
 	origin,
 }) => {
-	origin = "http://localhost:3000";
-	newOrigin = "https://bug-trackerzz.netlify.app";
+	origin = "https://bugz-trakerzz.netlify.app";
 	const verificationUrl = `${origin}/user/verify-email?token=${verificationToken}&email=${email}`;
 	const message = `
       <h1>Hello ${name}</h1>

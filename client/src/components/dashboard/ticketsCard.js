@@ -15,11 +15,8 @@ import {
 	useMediaQuery,
 } from "@mui/material";
 
-import {
-	createTheme,
-	responsiveFontSizes,
-	ThemeProvider,
-} from "@mui/material/styles";
+import { blue, green, deepOrange } from "@mui/material/colors";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 import CustomChip from "./customChip";
 
@@ -45,10 +42,32 @@ function TicketCard({ props }) {
 		alignItems: "center",
 		paddingTop: 0,
 	};
+
+	const myBlue = blue[500];
+	const myGreen = green[500];
+	const myDeepOrange = deepOrange[500];
+	let borderColor = null;
+	if (item.status === "progress") {
+		borderColor = myDeepOrange;
+	}
+	if (item.status === "open") {
+		borderColor = myBlue;
+	}
+	if (item.status === "resolved") {
+		borderColor = myGreen;
+	}
+
+	const borderStyle = {
+		marginBottom: "12px",
+		borderLeftColor: borderColor,
+		borderLeftWidth: "5px",
+		backgroundColor: `#001e3c`,
+	};
+
 	return (
-		<ThemeProvider theme={theme}>
+		<>
 			<Grow appear={true} in={true}>
-				<Card variant="outlined">
+				<Card variant="outlined" sx={borderStyle}>
 					<Grid container direction={"row"}>
 						<Grid item xs={12} sm={9}>
 							<CardContent>
@@ -123,7 +142,7 @@ function TicketCard({ props }) {
 					</Box>
 				</Card>
 			</Grow>
-		</ThemeProvider>
+		</>
 	);
 }
 

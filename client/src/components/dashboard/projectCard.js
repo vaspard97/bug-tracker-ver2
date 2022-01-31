@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteProject } from "../../redux/actions/projectAction";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import ConfirmationNumberRoundedIcon from "@mui/icons-material/ConfirmationNumberRounded";
@@ -23,16 +23,13 @@ import {
 	IconButton,
 } from "@mui/material";
 
-import {
-	createTheme,
-	responsiveFontSizes,
-	ThemeProvider,
-} from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 function ProjectCard({ props }) {
+	const userSelector = useSelector((state) => state.userReducers);
 	let theme = createTheme();
 	const isMediaSmall = useMediaQuery(theme.breakpoints.up("sm"));
-	theme = responsiveFontSizes(theme);
+
 	const [isProjectSelected, setIsProjectSelected] = useState(false);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -75,9 +72,13 @@ function ProjectCard({ props }) {
 	};
 
 	return (
-		<ThemeProvider theme={theme}>
+		<>
 			<Grow appear={true} in={true}>
-				<Card variant="outlined" key={_id} sx={{ marginBottom: "12px" }}>
+				<Card
+					variant="outlined"
+					key={_id}
+					sx={{ marginBottom: "12px", backgroundColor: `#001e3c` }}
+				>
 					<Grid container direction={"row"}>
 						<Grid item xs={12} sm={9}>
 							<CardHeader
@@ -162,8 +163,17 @@ function ProjectCard({ props }) {
 								</Box>
 
 								<Box>
-									<IconButton onClick={handleDeleteProject}>
-										<DeleteRoundedIcon color="error" />
+									<IconButton
+										disabled={userSelector.data.roles === "developer"}
+										onClick={handleDeleteProject}
+									>
+										<DeleteRoundedIcon
+											color={
+												userSelector.data.roles === "developer"
+													? "disabled"
+													: "error"
+											}
+										/>
 									</IconButton>
 								</Box>
 							</CardActions>
@@ -171,7 +181,7 @@ function ProjectCard({ props }) {
 					</Box>
 				</Card>
 			</Grow>
-		</ThemeProvider>
+		</>
 	);
 }
 

@@ -19,6 +19,46 @@ export const signIn = (formData, navigate) => async (dispatch) => {
 		navigate("/");
 	} catch (error) {
 		console.log(error);
+		dispatch({ type: "SIGNIN_ERROR", payload: error.response.data.message });
+		setTimeout(() => {
+			dispatch({
+				type: "CLEAR_SIGNIN_ERROR",
+			});
+		}, 3000);
+	}
+};
+
+export const signInDemoAccount = (navigate) => async (dispatch) => {
+	dispatch({ type: "SIGNIN" });
+	try {
+		const { data } = await api.signInDemo(navigate);
+		dispatch({ type: "SIGNIN_SUCCESS", payload: data });
+		navigate("/");
+	} catch (error) {
+		console.log(error.response);
+		dispatch({ type: "SIGNIN_ERROR", payload: error.response.data.message });
+		setTimeout(() => {
+			dispatch({
+				type: "CLEAR_SIGNIN_ERROR",
+			});
+		}, 3000);
+	}
+};
+
+export const signInDemoAccountDev = (navigate) => async (dispatch) => {
+	dispatch({ type: "SIGNIN" });
+	try {
+		const { data } = await api.signInDemoDev(navigate);
+		dispatch({ type: "SIGNIN_SUCCESS", payload: data });
+		navigate("/");
+	} catch (error) {
+		console.log(error.response);
+		dispatch({ type: "SIGNIN_ERROR", payload: error.response.data.message });
+		setTimeout(() => {
+			dispatch({
+				type: "CLEAR_SIGNIN_ERROR",
+			});
+		}, 3000);
 	}
 };
 
@@ -34,7 +74,6 @@ export const signUp = (formData, navigate) => async (dispatch) => {
 		setTimeout(() => {
 			dispatch({
 				type: "CLEAR_SIGNUP_ERROR",
-				payload: { data: null, success: false },
 			});
 		}, 3000);
 	}

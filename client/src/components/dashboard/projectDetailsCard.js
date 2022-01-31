@@ -24,7 +24,11 @@ function ProjectDetailsCard({ props }) {
 	};
 
 	return (
-		<Card variant="outlined" key={selectedProject._id}>
+		<Card
+			variant="outlined"
+			key={selectedProject._id}
+			sx={{ backgroundColor: `#001e3c` }}
+		>
 			<Box display="flex" justifyContent="space-between">
 				<CardHeader
 					title={selectedProject.title}

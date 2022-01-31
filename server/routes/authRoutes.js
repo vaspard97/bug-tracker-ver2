@@ -5,6 +5,8 @@ import {
 	signOut,
 	verifyEmail,
 	showCurrentUser,
+	signInDemo,
+	signInDemoDev,
 } from "../controller/auth.js";
 import {
 	authenticateUser,
@@ -13,12 +15,9 @@ import {
 
 const route = express.Router();
 
-route.get(
-	"/showMe",
-	authenticateUser,
-	authorizedPermission("admin"),
-	showCurrentUser
-);
+route.get("/showMe", authenticateUser, showCurrentUser);
+route.get("/signin/demo", signInDemo);
+route.get("/signin/demo2", signInDemoDev);
 route.post("/signin", signIn);
 route.post("/signup", signUp);
 route.delete("/signout", authenticateUser, signOut);

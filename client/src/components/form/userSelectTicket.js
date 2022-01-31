@@ -9,11 +9,16 @@ const customStyles = {
 
 		fontFamily: "Roboto",
 	}),
+	option: (provided, state) => ({
+		...provided,
+		backgroundColor: state.isFocused ? `#223345` : undefined,
+	}),
 	menuList: (provided, state) => ({
 		...provided,
 		height: "100%",
 		maxHeight: "120px",
 		padding: "5px",
+		backgroundColor: `#0a1929`,
 	}),
 
 	input: (provided, state) => ({
@@ -56,7 +61,10 @@ export default function UserSelectTicket({ props }) {
 		setOptions(
 			data?.users
 				.map((user) => {
-					return { value: user._id, label: user.email };
+					return {
+						value: user._id,
+						label: `${user.firstName} ${user.lastName}`,
+					};
 				})
 				.filter((user) => selectedProject.developers.includes(user.value))
 		);
@@ -70,7 +78,10 @@ export default function UserSelectTicket({ props }) {
 			setDefaultDevelopersValue(
 				data?.users
 					.map((user) => {
-						return { value: user._id, label: user.email };
+						return {
+							value: user._id,
+							label: `${user.firstName} ${user.lastName}`,
+						};
 					})
 					.filter((user) => {
 						return selectedProject.developers.includes(user.value);
@@ -81,7 +92,10 @@ export default function UserSelectTicket({ props }) {
 				...formData,
 				developers: data?.users
 					.map((user) => {
-						return { value: user._id, label: user.email };
+						return {
+							value: user._id,
+							label: `${user.firstName} ${user.lastName}`,
+						};
 					})
 					.filter((user) => {
 						return selectedProject.developers.includes(user.value);

@@ -21,11 +21,7 @@ import {
 import { blue, green, deepOrange } from "@mui/material/colors";
 
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import {
-	createTheme,
-	responsiveFontSizes,
-	ThemeProvider,
-} from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 import CustomChip from "../dashboard/customChip";
 
@@ -35,7 +31,6 @@ export default function MyTicketCard({ props }) {
 	const [isTicketSelected, setIsTicketSelected] = useState(false);
 	let theme = createTheme();
 	const isMediaSmall = useMediaQuery(theme.breakpoints.up("sm"));
-	theme = responsiveFontSizes(theme);
 
 	const navigate = useNavigate();
 
@@ -85,9 +80,11 @@ export default function MyTicketCard({ props }) {
 		marginBottom: "12px",
 		borderLeftColor: borderColor,
 		borderLeftWidth: "5px",
+		backgroundColor: `#001e3c`,
 	};
+
 	return (
-		<ThemeProvider theme={theme}>
+		<>
 			<Grow appear={true} in={true}>
 				<Card variant="outlined" sx={borderStyle}>
 					<Grid container direction={"row"}>
@@ -185,6 +182,6 @@ export default function MyTicketCard({ props }) {
 					</Box>
 				</Card>
 			</Grow>
-		</ThemeProvider>
+		</>
 	);
 }

@@ -87,7 +87,7 @@ function CreateTicket({ props }) {
 
 	return (
 		<Container component="main" maxWidth={"md"}>
-			<Card variant="outlined">
+			<Card variant="outlined" sx={{ backgroundColor: `#001e3c` }}>
 				<Box
 					sx={{
 						margin: 4,

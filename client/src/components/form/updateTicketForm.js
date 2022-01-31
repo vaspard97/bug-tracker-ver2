@@ -120,7 +120,11 @@ export default function UpdateTicketForm({ props }) {
 	}, [defaultPriorityValue]);
 
 	return (
-		<Container component="main" maxWidth={"md"}>
+		<Container
+			component="main"
+			maxWidth={"md"}
+			sx={{ backgroundColor: `#001e3c` }}
+		>
 			<Card variant="outlined">
 				<Box
 					margin={4}

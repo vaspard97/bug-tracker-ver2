@@ -111,7 +111,8 @@ export const signIn = async (req, res) => {
 		}
 
 		const tokenUser = {
-			fullName: `${existingUser.firstName} ${existingUser.lastName}`,
+			firstName: existingUser.firstName,
+			lastName: existingUser.lastName,
 			email: existingUser.email,
 			id: existingUser._id,
 			roles: existingUser.roles,
@@ -125,6 +126,53 @@ export const signIn = async (req, res) => {
 	}
 };
 
+export const signInDemo = async (req, res) => {
+	const email = "hasf.ifwat@gmail.com";
+
+	try {
+		const existingUser = await UserModels.findOne({ email }).select(
+			"-verified -verificationToken"
+		);
+
+		const tokenUser = {
+			firstName: existingUser.firstName,
+			lastName: existingUser.lastName,
+			email: existingUser.email,
+			id: existingUser._id,
+			roles: existingUser.roles,
+		};
+
+		let accessToken = createJWT({ payload: tokenUser, expires: "1h" });
+		return res.status(200).json({ tokenUser, accessToken });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ message: "Something Went Wrong" });
+	}
+};
+
+export const signInDemoDev = async (req, res) => {
+	const email = "hasif.ifwat.ramlan.ramli@gmail.com";
+
+	try {
+		const existingUser = await UserModels.findOne({ email }).select(
+			"-verified -verificationToken"
+		);
+
+		const tokenUser = {
+			firstName: existingUser.firstName,
+			lastName: existingUser.lastName,
+			email: existingUser.email,
+			id: existingUser._id,
+			roles: existingUser.roles,
+		};
+
+		let accessToken = createJWT({ payload: tokenUser, expires: "1h" });
+		return res.status(200).json({ tokenUser, accessToken });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ message: "Something Went Wrong" });
+	}
+};
 export const signOut = async (req, res) => {
 	await TokenModel.findOneAndDelete({ user: req.user.id });
 

@@ -25,7 +25,12 @@ export const signUpReducers = (
 				loading: false,
 			};
 		case "CLEAR_SIGNUP_ERROR":
-			return action.payload;
+			return {
+				...state,
+				data: null,
+				success: false,
+				loading: false,
+			};
 		default:
 			return state;
 	}

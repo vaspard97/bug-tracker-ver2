@@ -12,7 +12,7 @@ import AdminTable from "./components/dashboard/admin";
 import VerifyPage from "./components/pages/VerifyPage";
 import ProjectDetails from "./components/dashboard/projectDetailsMain";
 import RequireAuth from "./RequireAuth";
-import DeveloperAccount from "./components/demoAccount/developerAccount";
+
 function App() {
 	const dispatch = useDispatch();
 	useEffect(() => {

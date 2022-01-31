@@ -26,9 +26,24 @@ const route = express.Router();
 route.get("/users", authenticateUser, getUsers);
 route.get("/projects/:id", authenticateUser, getOneProject); //all team members
 route.get("/projects", authenticateUser, getProjects); //all team member
-route.post("/projects", authenticateUser, createProject); //only team lead
-route.patch("/projects/:id", authenticateUser, updateProject); //only team lead
-route.delete("/projects/:id", authenticateUser, deleteProject); //only team lead
+route.post(
+	"/projects",
+	authenticateUser,
+	authorizedPermission("team lead", "admin"),
+	createProject
+); //only team lead
+route.patch(
+	"/projects/:id",
+	authenticateUser,
+	authorizedPermission("team lead", "admin"),
+	updateProject
+); //only team lead
+route.delete(
+	"/projects/:id",
+	authenticateUser,
+	authorizedPermission("team lead", "admin"),
+	deleteProject
+); //only team lead
 
 route.post("/projects/:projectid/ticket", authenticateUser, createTicket);
 route.get("/projects/:projectid/ticket", authenticateUser, getTickets);

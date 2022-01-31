@@ -1,6 +1,5 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 
 import {
 	Drawer as MUIDrawer,
@@ -30,7 +29,6 @@ function Sidebar({ props }) {
 	const itemList = [
 		{ text: "Dashboard", icon: <DashboardIcon />, link: "" },
 		{ text: "My Tickets", icon: <ConfirmationNumberIcon />, link: "ticket" },
-		{ text: "About", icon: <InfoRoundedIcon />, link: "ticket" },
 	];
 
 	return (

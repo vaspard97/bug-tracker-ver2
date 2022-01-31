@@ -1,6 +1,8 @@
 import { Typography, Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function NoTicketFound() {
+	const navigate = useNavigate();
 	return (
 		<Box
 			display={"flex"}
@@ -28,7 +30,7 @@ export default function NoTicketFound() {
 					Please create a new ticket through the project page or wait until you
 					are assign one.
 				</Typography>
-				<Button variant="contained" fullWidth>
+				<Button variant="contained" fullWidth onClick={() => navigate("/")}>
 					View My Projects
 				</Button>
 			</Box>

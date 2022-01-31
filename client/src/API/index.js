@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const URL = axios.create({
-	baseURL: "https://bug-tracker-ver2.herokuapp.com/",
+	baseURL: "https://bug-tracker-ver2.herokuapp.com//",
 });
 URL.interceptors.request.use((req) => {
 	if (localStorage.getItem("profile")) {
@@ -21,6 +21,8 @@ export const createUser = (formData, navigate) =>
 	URL.post(`auth/signup`, formData);
 export const signInUser = (formData, navigate) =>
 	URL.post(`auth/signin`, formData);
+export const signInDemo = (navigate) => URL.get(`auth/signin/demo`);
+export const signInDemoDev = (navigate) => URL.get(`auth/signin/demo2`);
 export const signOutUser = (navigate) => URL.delete(`auth/signOut`);
 export const verifyUser = (verificationData) =>
 	URL.post(`auth/verify-email`, verificationData);

@@ -28,6 +28,7 @@ export const authorizedPermission = (...allowedRoles) => {
 		}
 
 		if (!allowedRoles.includes(req.user.roles)) {
+			console.log(req.user.roles);
 			console.log("Unauthorized role");
 			return res.status(401).json({ message: "Unauthorized" });
 		}

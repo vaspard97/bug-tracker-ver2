@@ -7,17 +7,23 @@ import {
 	responsiveFontSizes,
 	ThemeProvider,
 } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import combinedReducer from "./redux/index";
-
+const darkTheme = createTheme({
+	palette: {
+		mode: "dark",
+	},
+});
 const store = createStore(combinedReducer, compose(applyMiddleware(thunk)));
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 ReactDOM.render(
 	<Provider store={store}>
-		<ThemeProvider theme={theme}>
+		<ThemeProvider theme={(theme, darkTheme)}>
+			<CssBaseline />
 			<App />
 		</ThemeProvider>
 	</Provider>,

@@ -92,7 +92,7 @@ function CreateProject({ props }) {
 	}, [getAllUser.loading === false]);
 	return (
 		<Container component="main" maxWidth={"md"}>
-			<Card variant="outlined">
+			<Card variant="outlined" sx={{ backgroundColor: `#001e3c` }}>
 				<Box
 					margin={4}
 					sx={{

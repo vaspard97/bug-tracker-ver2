@@ -7,10 +7,15 @@ const customStyles = {
 		...provided,
 		fontFamily: "Roboto",
 	}),
+	option: (provided, state) => ({
+		...provided,
+		backgroundColor: state.isFocused ? `#223345` : undefined,
+	}),
 	menuList: (provided, state) => ({
 		...provided,
 		height: "120px",
 		padding: "5px",
+		backgroundColor: `#0a1929`,
 	}),
 
 	input: (provided, state) => ({

@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../../redux/actions/user";
+import {
+	signIn,
+	signInDemoAccount,
+	signInDemoAccountDev,
+} from "../../redux/actions/user";
 import { CircularProgress } from "@mui/material";
 import {
 	Button,
@@ -12,11 +16,12 @@ import {
 	Container,
 	Snackbar,
 } from "@mui/material";
-
+import HelpIcon from "@mui/icons-material/Help";
 import FormAlert from "./formAlert";
 
 let initialState = { email: "", password: "" };
-function SignIn() {
+function SignIn({ props }) {
+	const { setIsModalShown } = props;
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const selector = useSelector((state) => state.userReducers);
@@ -29,7 +34,13 @@ function SignIn() {
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
+	const handleDemoAccount = () => {
+		dispatch(signInDemoAccount(navigate));
+	};
 
+	const handleDemoAccountDev = () => {
+		dispatch(signInDemoAccountDev(navigate));
+	};
 	const cleanUpSelector = () => {
 		selector.data = null;
 		selector.success = false;
@@ -48,6 +59,7 @@ function SignIn() {
 				}}
 			>
 				<Typography variant="h4">Sign In</Typography>
+
 				<Box component="form" onSubmit={handleSubmit} marginTop={1}>
 					<TextField
 						fullWidth
@@ -69,13 +81,21 @@ function SignIn() {
 						autoComplete="new-password"
 						onChange={handleChange}
 					/>
-
+					<Button
+						startIcon={<HelpIcon></HelpIcon>}
+						size="large"
+						onClick={() => {
+							setIsModalShown(true);
+						}}
+					>
+						Learn More About The Project
+					</Button>
 					<Button
 						disabled={selector.loading}
 						type="submit"
 						fullWidth
 						variant="contained"
-						sx={{ mt: 3, mb: 1 }}
+						sx={{ mt: 1, mb: 1 }}
 					>
 						{selector.loading ? <CircularProgress /> : <> Sign In</>}
 					</Button>
@@ -84,15 +104,27 @@ function SignIn() {
 						fullWidth
 						variant="contained"
 						color="success"
-						sx={{ mb: 2 }}
-						onClick={() => {
-							console.log("Demo Account");
-						}}
+						sx={{ mb: 1 }}
+						onClick={handleDemoAccount}
 					>
 						{selector.loading ? (
 							<CircularProgress />
 						) : (
-							<> Sign In With Demo Account</>
+							<> Sign In As Team Lead Demo</>
+						)}
+					</Button>
+					<Button
+						disabled={selector.loading}
+						fullWidth
+						variant="contained"
+						color="warning"
+						sx={{ mb: 2 }}
+						onClick={handleDemoAccountDev}
+					>
+						{selector.loading ? (
+							<CircularProgress />
+						) : (
+							<> Sign In As Developer Demo</>
 						)}
 					</Button>
 				</Box>
@@ -103,7 +135,6 @@ function SignIn() {
 				justifyContent="space-between"
 				marginTop={2}
 			>
-				<Typography variant="body2">Forgot Password?</Typography>
 				<Typography
 					variant="body2"
 					component={Link}

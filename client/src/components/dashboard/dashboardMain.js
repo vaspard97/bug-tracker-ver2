@@ -21,7 +21,7 @@ export default function DataTable() {
 	const [selectedId, setSelectedId] = useState(null);
 	const dispatch = useDispatch();
 	const projectsSelector = useSelector((state) => state.projectReducers);
-
+	const userSelector = useSelector((state) => state.userReducers);
 	const showProjectForm = () => {
 		setIsProjectFormVisible(!isProjectFormVisible);
 	};
@@ -68,7 +68,10 @@ export default function DataTable() {
 							variant="contained"
 							onClick={showProjectForm}
 							size={"small"}
-							disabled={projectsSelector?.loading}
+							disabled={
+								projectsSelector?.loading ||
+								userSelector.data.roles === "developer"
+							}
 						>
 							Create Project
 						</Button>
